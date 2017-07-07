@@ -1,11 +1,10 @@
 /* eslint-disable */
-const baseConfig = require('./webpack.base.js')
+const baseConfig = require('./webpack.base.conf.js')
 const merge = require('webpack-merge')
 const webpack = require('webpack')
 const path = require('path')
 const chalk = require('chalk')
 
-const WebpackDevServer = require('webpack-dev-server');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(baseConfig, {
@@ -15,7 +14,7 @@ module.exports = merge(baseConfig, {
       template: './index.html',
     }),
 
-    // new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
 
     // new ScriptExtHtmlWebpackPlugin({
     //   defaultAttribute: 'defer'
@@ -33,8 +32,8 @@ module.exports = merge(baseConfig, {
     },
     contentBase: path.join(__dirname, '../server'),
     historyApiFallback: true,
-    // hot: true,
-    // publicPath: '',
+    hot: true,
+    publicPath: '/',
   }
 })
 

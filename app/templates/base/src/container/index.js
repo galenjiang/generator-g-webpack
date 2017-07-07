@@ -1,4 +1,4 @@
-import copyright from '../component/copyright'
+import copyright from '../components/copyright'
 import '../css/reset.css'
 import '../css/app.css'
 

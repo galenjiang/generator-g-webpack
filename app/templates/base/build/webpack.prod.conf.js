@@ -1,5 +1,5 @@
 /* eslint-disable */
-const baseConfig = require('./webpack.base.js')
+const baseConfig = require('./webpack.base.conf.js')
 const merge = require('webpack-merge')
 const path = require('path')
 const webpack = require('webpack')

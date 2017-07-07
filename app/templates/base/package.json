@@ -1,8 +1,14 @@
 {
+  "name": "my-common-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "build": "rm -rf ./dist && cross-env NODE_ENV=production webpack --config ./build/webpack.production.js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.development.js --inline"
+    "build": "rm -rf ./dist && cross-env NODE_ENV=production node ./build/build",
+    "dev": "cross-env NODE_ENV=development node ./build/dev-server"
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "babel-runtime": "^6.11.6"
   },
@@ -11,16 +17,17 @@
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.1",
-    "babel-preset-env": "^1.6.0",
     "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-env": "^1.6.0",
     "chalk": "^2.0.1",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.4",
     "eslint": "^4.1.1",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.6.1",
-    "extract-text-webpack-plugin": "^2.1.2",
     "eventsource-polyfill": "^0.9.6",
+    "express": "^4.15.3",
+    "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
     "postcss-loader": "^2.0.6",

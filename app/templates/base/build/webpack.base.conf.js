@@ -10,15 +10,13 @@ module.exports = {
 
   entry: {
     main: isDevelopment
-      ? [
-        './app',
-      ]
+      ? ['../build/dev-client', './app']
       : ['./app']
   },
 
   output: {
     path: path.resolve(__dirname, isDevelopment ? '../server' : '../dist'),
-    publicPath: '',                                                               // default
+    publicPath: '/',                                                               // default ''
     filename: isDevelopment ? '[name].js' :'[name]-[hash:8].js',
     // chunkFilename: isServer ? '[id].chunk.js' : '[name].js'
   },
@@ -31,7 +29,8 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader'
+        use: 'babel-loader',
+        exclude: /node_modules/
       },
 
       {
