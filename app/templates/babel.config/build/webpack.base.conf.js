@@ -22,13 +22,13 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.ts'],
   },
 
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js)|(ts)$/,
         use: 'babel-loader',
         exclude: /node_modules/
       },
@@ -82,5 +82,5 @@ module.exports = {
     // }),
   ],
 
-  // devtool: isDevelopment ? 'eval' :'eval-source-map'
+  devtool: isDevelopment ? 'cheap-module-source-map' :'eval-source-map'
 }

@@ -1,0 +1,13 @@
+
+#app {
+  color: red;
+  min-height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 50px;
+}
+
+#app img{
+  width: 200px;
+  height: 150px;
+  background: url('../assets/seal.jpg') no-repeat 50% 50%;
+}

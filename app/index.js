@@ -21,32 +21,50 @@ module.exports = class extends Generator {
   }
 
   prompting() {
-    return this.prompt([{
-      type: 'confirm',
-      name: 'npminstall',
-      message: 'Do you wanna install automaticly',
-      default: false, // Default to current folder name
-      store: true,
-    }])
+    return this.prompt([
+      {
+        type: 'confirm',
+        name: 'npminstall',
+        message: 'Do you wanna install automaticly',
+        default: false, // Default to current folder name
+        store: true,
+      },
+      {
+        type: 'checkbox',
+        name: 'compiler',
+        message: 'Choose a compiler',
+        choices: ['ts', 'babel'],
+        default: 'ts', // Default to current folder name
+        store: true,
+      },
+    ])
   }
 
   writing() {
-    fs.copy(path.join(this.sourceRoot(), 'base'), this.destinationRoot())
-      .then(() => {
-        // this.fs.readJSON(
-        //   this.templatePath('_package.json'),
-        //  this.destinationPath('package.json')
-        // )
-
-        this.fs.writeJSON(
+    async function write() {
+      if (this.options.compiler === 'ts') {
+        await fs.copy(path.join(this.sourceRoot(), 'ts.config'), this.destinationRoot())
+        await this.fs.writeJSON(
           this.destinationPath('package.json'),
           Object.assign(
             this.fs.readJSON(path.join(process.cwd(), 'package.json')) || {},
-            this.fs.readJSON(this.templatePath('_package.json'))
-          )
+            this.fs.readJSON(this.templatePath('_package.ts.json')),
+          ),
         )
-      })
-      .then(() => this.log('Base file structure is built by the scaffold!'))
+        this.log('file structure is built by the scaffold!')
+      } else {
+        await fs.copy(path.join(this.sourceRoot(), 'babel.config'), this.destinationRoot())
+        await this.fs.writeJSON(
+          this.destinationPath('package.json'),
+          Object.assign(
+            this.fs.readJSON(path.join(process.cwd(), 'package.json')) || {},
+            this.fs.readJSON(this.templatePath('_package.babel.json')),
+          ),
+        )
+        this.log('file structure is built by the scaffold!')
+      }
+    }
+    write.call(this)
   }
 
   install() {

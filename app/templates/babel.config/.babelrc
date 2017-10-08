@@ -1,0 +1,18 @@
+{
+  // Plugins run before Presets.
+  // Plugin ordering is first to last.
+  // Preset ordering is reversed (last to first).
+  "plugins": [
+    // "transform-runtime"  // error in babel 7 is it need when use preset env
+  ],
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": ["last 2 versions", "> 1%"]
+      },
+      "modules": false
+    }],
+    "typescript"
+  ]
+}
+
