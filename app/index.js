@@ -27,22 +27,24 @@ module.exports = class extends Generator {
         name: 'npminstall',
         message: 'Do you wanna install automaticly',
         default: false, // Default to current folder name
-        store: true,
       },
       {
-        type: 'checkbox',
+        type: 'list',
         name: 'compiler',
         message: 'Choose a compiler',
         choices: ['ts', 'babel'],
-        default: 'ts', // Default to current folder name
-        store: true,
+        default: 0, // Default to current folder name
       },
     ])
+    .then((res) => {
+      this.npminstall = res.npminstall
+      this.compiler = res.compiler
+    })
   }
 
   writing() {
     async function write() {
-      if (this.options.compiler === 'ts') {
+      if (this.compiler === 'ts') {
         await fs.copy(path.join(this.sourceRoot(), 'ts.config'), this.destinationRoot())
         await this.fs.writeJSON(
           this.destinationPath('package.json'),
@@ -69,7 +71,7 @@ module.exports = class extends Generator {
 
   install() {
     const self = this
-    if (this.options.npminstall) {
+    if (this.npminstall) {
       this.installDependencies({
         bower: false,
         yarn: false,
@@ -82,7 +84,7 @@ module.exports = class extends Generator {
   }
 
   end() {
-    if (this.options.npminstall) {
+    if (this.npminstall) {
       this.log('You can build your app!');
     } else {
       this.log('Please use npm install to init your project!')
