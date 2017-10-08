@@ -1,6 +1,6 @@
 {
   "name": "generator-g-webpack",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "yeoman generator of webpack built app",
   "main": "index.js",
   "scripts": {
